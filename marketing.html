@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rui Coelho — Produto & Tecnologia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Hind:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ocre:      #C8963C;
+  --ocre-lt:   #E5B86A;
+  --ocre-dk:   #9A6E24;
+  --terra:     #8B3A2A;
+  --indigo:    #2B4C7E;
+  --indigo-lt: #4A72B0;
+  --creme:     #F7F0E3;
+  --creme-dk:  #E8DCC8;
+  --dark:      #1A1208;
+  --text-warm: #6B5A3E;
+  --text-lt:   #D4C4A8;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Hind', sans-serif; background: var(--creme); color: var(--dark); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 64px;
+  background: rgba(247,240,227,0.93);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(200,150,60,0.2);
+  transition: padding 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic;
+  color: var(--dark); text-decoration: none;
+}
+.nav-logo span { color: var(--ocre); font-style: normal; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-warm); text-decoration: none;
+  transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--ocre);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--ocre); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--ocre); }
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  min-height: 52vh;
+  background: var(--indigo);
+  display: flex; align-items: flex-end;
+  padding: 120px 64px 80px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(229,184,106,0.04) 0, rgba(229,184,106,0.04) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(-45deg, rgba(229,184,106,0.04) 0, rgba(229,184,106,0.04) 1px, transparent 0, transparent 50%);
+  background-size: 32px 32px;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; bottom: -80px; right: 80px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,150,60,0.12) 0%, transparent 70%);
+}
+.page-hero-content { position: relative; z-index: 1; max-width: 700px; }
+.page-eyebrow {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+}
+.page-eyebrow-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--ocre);
+  box-shadow: 0 0 0 3px rgba(200,150,60,0.2);
+}
+.page-eyebrow-text {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ocre);
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--creme); margin-bottom: 24px;
+}
+.page-title em { font-style: italic; color: var(--ocre-lt); }
+.page-subtitle {
+  font-size: 1rem; font-weight: 300; color: rgba(212,196,168,0.9);
+  line-height: 1.7; max-width: 520px;
+}
+.page-subtitle strong { color: var(--creme); font-weight: 600; }
+
+/* ─── SECTION SYSTEM ─── */
+.section-rule {
+  display: flex; align-items: center; gap: 20px;
+  padding: 0 64px; margin-bottom: 56px;
+}
+.section-rule .tag {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--ocre); white-space: nowrap;
+}
+.section-rule .line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(200,150,60,0.5), transparent);
+}
+.section-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+  line-height: 1.1; color: var(--dark);
+}
+.section-h em { font-style: italic; color: var(--indigo); }
+
+/* ─── INTRO ─── */
+.intro-band {
+  padding: 80px 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  background: var(--creme); border-bottom: 1px solid var(--creme-dk);
+}
+.intro-band p {
+  font-size: 1.05rem; line-height: 1.85; color: var(--text-warm); font-weight: 300;
+}
+.intro-band p strong { color: var(--dark); font-weight: 600; }
+.intro-band p + p { margin-top: 18px; }
+.pullquote {
+  border-left: 3px solid var(--ocre); padding: 20px 28px;
+  background: rgba(200,150,60,0.06);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-style: italic; color: var(--dark); line-height: 1.7;
+}
+
+/* ─── PORTFOLIO ─── */
+.portfolio { padding: 80px 64px 100px; background: var(--creme); }
+.port-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 2px; background: var(--creme-dk); margin-top: 60px;
+}
+.port-card {
+  background: var(--creme); padding: 52px 44px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.port-card:hover { background: #fff; }
+.port-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+  background: transparent; transition: background 0.3s;
+}
+.port-card:hover::after { background: var(--ocre); }
+.port-category {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--ocre); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.port-category::before {
+  content: ''; width: 20px; height: 1px; background: var(--ocre);
+}
+.port-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; color: var(--dark); margin-bottom: 14px; line-height: 1.2;
+}
+.port-text {
+  font-size: 0.9rem; line-height: 1.75; color: var(--text-warm); font-weight: 300;
+  margin-bottom: 24px;
+}
+.port-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.port-tag {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--indigo); border: 1px solid rgba(43,76,126,0.25);
+  padding: 4px 12px; background: rgba(43,76,126,0.04);
+}
+
+/* ─── APPROACH ─── */
+.approach { padding: 80px 64px 100px; background: var(--dark); }
+.approach .section-h { color: var(--creme); margin-bottom: 64px; }
+.approach .section-h em { color: var(--ocre-lt); }
+.approach .section-rule .tag { color: var(--ocre-lt); }
+.approach .section-rule .line { background: linear-gradient(90deg, rgba(200,150,60,0.4), transparent); }
+
+.approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(200,150,60,0.08); }
+.approach-card {
+  background: var(--dark); padding: 44px 36px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+.approach-card:hover { border-color: var(--ocre); background: rgba(200,150,60,0.04); }
+.approach-icon { color: var(--ocre); margin-bottom: 24px; width: 32px; height: 32px; }
+.approach-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; color: var(--creme); margin-bottom: 12px;
+}
+.approach-text { font-size: 0.88rem; line-height: 1.75; color: var(--text-lt); font-weight: 300; }
+
+/* ─── DISCIPLINES ─── */
+.disciplines { padding: 80px 64px 100px; background: var(--creme-dk); }
+.disc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--creme); margin-top: 60px; }
+.disc-item {
+  background: var(--creme-dk); padding: 36px 28px;
+  transition: background 0.3s;
+}
+.disc-item:hover { background: var(--creme); }
+.disc-num {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 2rem; color: rgba(200,150,60,0.25); line-height: 1; margin-bottom: 16px;
+}
+.disc-name {
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--dark); margin-bottom: 8px;
+}
+.disc-desc { font-size: 0.82rem; color: var(--text-warm); line-height: 1.6; font-weight: 300; }
+
+/* ─── CTA BAND ─── */
+.cta-band {
+  padding: 80px 64px; background: var(--ocre);
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.cta-band-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--dark); line-height: 1.15; margin-bottom: 12px;
+}
+.cta-band-left p { font-size: 1rem; color: var(--dark); opacity: 0.7; font-weight: 300; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 14px; flex-shrink: 0;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--ocre); background: var(--dark);
+  padding: 18px 36px; border: 2px solid var(--dark);
+  transition: background 0.3s, color 0.3s;
+}
+.cta-btn:hover { background: transparent; color: var(--dark); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 36px 64px; background: var(--dark);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-left {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-style: italic; color: var(--ocre-lt);
+}
+.footer-nav { display: flex; gap: 28px; }
+.footer-nav a {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(200,150,60,0.4);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-nav a:hover, .footer-nav a.active { color: var(--ocre-lt); }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; } .nav-links { display: none; }
+  .page-hero { padding: 100px 24px 60px; }
+  .intro-band { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+  .section-rule { padding: 0 24px; }
+  .portfolio, .approach, .disciplines, .cta-band { padding-left: 24px; padding-right: 24px; }
+  .port-grid { grid-template-columns: 1fr; }
+  .approach-grid { grid-template-columns: 1fr; }
+  .disc-grid { grid-template-columns: 1fr 1fr; }
+  .cta-band { flex-direction: column; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="top-nav">
+  <a href="rui-coelho.html" class="nav-logo">Rui <span>Coelho</span></a>
+  <ul class="nav-links">
+    <li><a href="rui-coelho.html">Início</a></li>
+    <li><a href="support.html">Consultoria</a></li>
+    <li><a href="marketing.html" class="active">Produto &amp; Tec</a></li>
+    <li><a href="rui-coelho.html#contato">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <div class="page-eyebrow">
+      <div class="page-eyebrow-dot"></div>
+      <div class="page-eyebrow-text">Produto & Tecnologia</div>
+    </div>
+    <h1 class="page-title">Produto digital<br>para <em>setores exigentes.</em></h1>
+    <p class="page-subtitle">
+      Energia distribuída e compliance fiscal têm algo em comum: erros custam caro, dados têm de ser fiáveis e os utilizadores não têm paciência para software mal pensado. É exatamente aqui que trabalho.
+    </p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-band">
+  <div class="reveal">
+    <p>
+      Construir produto digital para energia solar ou para compliance fiscal não é como construir mais uma app. São contextos onde os dados têm de ser exatos, as integrações complexas, os utilizadores técnicos — e onde a margem para erro é mínima.
+    </p>
+    <p>
+      Tenho experiência real nestes dois mundos: fui responsável pelo desenvolvimento de plataformas proprietárias de monitoramento de ativos energéticos na Faro Energy, e liderei a área de Tax IT na BDO Brasil — uma das maiores firmas de auditoria do mundo. <strong>Não projeto o que não conheço.</strong>
+    </p>
+  </div>
+  <div class="pullquote reveal d2">
+    "O melhor produto digital para o setor de energia não é o mais bonito — é o que os engenheiros de campo usam sem formação e os CFOs confiam sem reservas."
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<div id="portfolio"></div>
+<div class="section-rule" style="padding-top:80px">
+  <span class="tag">Portfólio</span><div class="line"></div>
+</div>
+<section class="portfolio">
+  <h2 class="section-h reveal">Produto digital<br><em>com contexto real</em></h2>
+  <div class="port-grid">
+
+    <div class="port-card reveal d1">
+      <div class="port-category">Energia Solar · Produto</div>
+      <div class="port-title">Plataforma de Monitoramento Remoto de Ativos</div>
+      <div class="port-text">Desenvolvimento de software proprietário para monitoramento em tempo real de plantas fotovoltaicas distribuídas. Arquitetura orientada a fiabilidade e escala — com alertas automáticos, análise de performance e relatórios para clientes e equipas técnicas. O produto substituiu ferramentas genéricas por uma solução desenhada especificamente para o negócio de energia distribuída.</div>
+      <div class="port-tags">
+        <span class="port-tag">IoT</span>
+        <span class="port-tag">Telemetria</span>
+        <span class="port-tag">Dashboards</span>
+        <span class="port-tag">Asset Management</span>
+        <span class="port-tag">Energia Solar</span>
+      </div>
+    </div>
+
+    <div class="port-card reveal d2">
+      <div class="port-category">Tax Technology · Plataforma</div>
+      <div class="port-title">Sistemas de Gestão Fiscal para Auditoria</div>
+      <div class="port-text">Liderança do desenvolvimento e implementação de plataformas tecnológicas para compliance tributário na BDO Brasil — uma das maiores firmas de auditoria do mundo. Sistemas que lidam com alta complexidade regulatória, volumes massivos de dados fiscais e exigências de rastreabilidade que não admitem margem de erro.</div>
+      <div class="port-tags">
+        <span class="port-tag">Tax IT</span>
+        <span class="port-tag">Compliance</span>
+        <span class="port-tag">ERP</span>
+        <span class="port-tag">Automação Fiscal</span>
+        <span class="port-tag">Auditoria</span>
+      </div>
+    </div>
+
+    <div class="port-card reveal d3">
+      <div class="port-category">Energia · Gestão de Clientes</div>
+      <div class="port-title">Plataforma de Gestão Comercial e Operacional</div>
+      <div class="port-text">Arquitetura e desenvolvimento de sistemas integrados de gestão para empresas de energia solar — desde o onboarding de clientes até à faturação, contratos e gestão do ciclo de vida dos ativos. Produto desenhado para equipas não técnicas operarem com autonomia e confiança num setor de elevada complexidade regulatória.</div>
+      <div class="port-tags">
+        <span class="port-tag">CRM Setorial</span>
+        <span class="port-tag">Faturação</span>
+        <span class="port-tag">Gestão de Contratos</span>
+        <span class="port-tag">Operações</span>
+      </div>
+    </div>
+
+    <div class="port-card reveal d4">
+      <div class="port-category">GreenTech · Sistemas de Dados</div>
+      <div class="port-title">Tecnologia para Gestão de Recursos Naturais</div>
+      <div class="port-text">Co-fundação e liderança técnica da Agrocortex — empresa pioneira na aplicação de geoprocessamento e sistemas de informação à gestão sustentável de florestas tropicais. Um dos primeiros projetos no Brasil a integrar tecnologia de dados com impacto ambiental mensurável em larga escala.</div>
+      <div class="port-tags">
+        <span class="port-tag">Geoprocessamento</span>
+        <span class="port-tag">GIS</span>
+        <span class="port-tag">Dados Ambientais</span>
+        <span class="port-tag">GreenTech</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- APPROACH -->
+<div class="section-rule" style="padding-top:60px;padding-bottom:0">
+  <span class="tag" style="color:var(--ocre-lt)">Abordagem</span>
+  <div class="line" style="background:linear-gradient(90deg,rgba(200,150,60,0.4),transparent)"></div>
+</div>
+<section class="approach">
+  <h2 class="section-h reveal">O que diferencia<br><em>produto para estes setores</em></h2>
+  <div class="approach-grid">
+
+    <div class="approach-card reveal d1">
+      <svg class="approach-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      <div class="approach-title">O domínio do negócio vem primeiro</div>
+      <div class="approach-text">Em energia e fiscal, não se consegue fazer bom produto sem entender profundamente o negócio. Um engenheiro de campo que usa um dashboard tem necessidades radicalmente diferentes de um analista fiscal. Conheço os dois lados.</div>
+    </div>
+
+    <div class="approach-card reveal d2">
+      <svg class="approach-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+      </svg>
+      <div class="approach-title">Dados são o produto</div>
+      <div class="approach-text">Nestes setores, a interface é o meio — os dados são o fim. A arquitetura de como os dados são recolhidos, processados, apresentados e auditados define a qualidade do produto. O design começa aí, não nas cores.</div>
+    </div>
+
+    <div class="approach-card reveal d3">
+      <svg class="approach-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <div class="approach-title">Fiabilidade não é opcional</div>
+      <div class="approach-text">Em compliance fiscal, um dado errado tem consequências legais. Em monitoramento de energia, uma falha não detetada custa dinheiro real. Construo produto para contextos onde errar tem custo — e onde a confiança é conquistada lentamente.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DISCIPLINES -->
+<div class="section-rule" style="padding-top:80px">
+  <span class="tag">Disciplinas</span><div class="line"></div>
+</div>
+<section class="disciplines">
+  <h2 class="section-h reveal">Áreas de<br><em>produto & tecnologia</em></h2>
+  <div class="disc-grid">
+    <div class="disc-item reveal d1">
+      <div class="disc-num">01</div>
+      <div class="disc-name">Monitoramento de Ativos</div>
+      <div class="disc-desc">Plataformas de telemetria e visualização de dados para plantas de energia solar em operação contínua.</div>
+    </div>
+    <div class="disc-item reveal d2">
+      <div class="disc-num">02</div>
+      <div class="disc-name">Tax Technology</div>
+      <div class="disc-desc">Sistemas de compliance fiscal, automação tributária e gestão de obrigações acessórias em ambientes regulatórios complexos.</div>
+    </div>
+    <div class="disc-item reveal d3">
+      <div class="disc-num">03</div>
+      <div class="disc-name">Produto para Energia</div>
+      <div class="disc-desc">Discovery, arquitetura e desenvolvimento de plataformas proprietárias para o setor de energia distribuída — da conceção ao go-live.</div>
+    </div>
+    <div class="disc-item reveal d4">
+      <div class="disc-num">04</div>
+      <div class="disc-name">Integração de Dados</div>
+      <div class="disc-desc">Pipelines de dados entre medidores, inversores, ERPs e plataformas de faturação — com fiabilidade e rastreabilidade.</div>
+    </div>
+    <div class="disc-item reveal d1">
+      <div class="disc-num">05</div>
+      <div class="disc-name">Dashboard & Reporting</div>
+      <div class="disc-desc">Interfaces de análise e relatórios para equipas técnicas e executivas — onde a clareza dos dados é também uma decisão de design.</div>
+    </div>
+    <div class="disc-item reveal d2">
+      <div class="disc-num">06</div>
+      <div class="disc-name">Automação de Processos</div>
+      <div class="disc-desc">Eliminação de trabalho manual repetitivo em operações de energia e fiscal — com foco em auditabilidade e controlo.</div>
+    </div>
+    <div class="disc-item reveal d3">
+      <div class="disc-num">07</div>
+      <div class="disc-name">GIS & Dados Espaciais</div>
+      <div class="disc-desc">Aplicação de geoprocessamento para gestão de ativos físicos distribuídos — com experiência em energia e gestão florestal.</div>
+    </div>
+    <div class="disc-item reveal d4">
+      <div class="disc-num">08</div>
+      <div class="disc-name">ESG & Impacto Mensurável</div>
+      <div class="disc-desc">Sistemas de medição e reporte de impacto ambiental — para empresas B Corp, geradoras de energia e projetos de conservação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band reveal">
+  <div class="cta-band-left">
+    <h2>Tem um produto de energia<br>ou fiscal para construir?</h2>
+    <p>Quem já esteve do lado de dentro destes setores constrói produto diferente. Vamos conversar.</p>
+  </div>
+  <a href="mailto:ruialmodovar@gmail.com" class="cta-btn">
+    Falar com Rui
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">Rui Coelho</div>
+  <nav class="footer-nav">
+    <a href="rui-coelho.html">Início</a>
+    <a href="support.html">Consultoria</a>
+    <a href="marketing.html" class="active">Produto &amp; Tec</a>
+    <a href="mailto:ruialmodovar@gmail.com">Contacto</a>
+  </nav>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  window.addEventListener('scroll', () => {
+    document.getElementById('top-nav').style.padding = window.scrollY > 50 ? '14px 64px' : '22px 64px';
+  });
+</script>
+</body>
+</html>

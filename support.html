@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rui Coelho — Consultoria & Suporte</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Hind:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ocre:      #C8963C;
+  --ocre-lt:   #E5B86A;
+  --ocre-dk:   #9A6E24;
+  --terra:     #8B3A2A;
+  --indigo:    #2B4C7E;
+  --indigo-lt: #4A72B0;
+  --creme:     #F7F0E3;
+  --creme-dk:  #E8DCC8;
+  --dark:      #1A1208;
+  --text-warm: #6B5A3E;
+  --text-lt:   #D4C4A8;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Hind', sans-serif; background: var(--creme); color: var(--dark); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 64px;
+  background: rgba(247,240,227,0.93);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(200,150,60,0.2);
+  transition: padding 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic;
+  color: var(--dark); text-decoration: none;
+}
+.nav-logo span { color: var(--ocre); font-style: normal; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-warm); text-decoration: none;
+  transition: color 0.2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--ocre);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--ocre); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--ocre); }
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* ─── PAGE HERO ─── */
+.page-hero {
+  min-height: 52vh;
+  background: var(--dark);
+  display: flex; align-items: flex-end;
+  padding: 120px 64px 80px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+.page-hero::after {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,150,60,0.08) 0%, transparent 70%);
+}
+.page-hero-content { position: relative; z-index: 1; max-width: 700px; }
+.page-eyebrow {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+}
+.page-eyebrow-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--ocre);
+  box-shadow: 0 0 0 3px rgba(200,150,60,0.2);
+}
+.page-eyebrow-text {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ocre);
+}
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 1; letter-spacing: -0.02em;
+  color: var(--creme); margin-bottom: 24px;
+}
+.page-title em { font-style: italic; color: var(--ocre-lt); }
+.page-subtitle {
+  font-size: 1rem; font-weight: 300; color: var(--text-lt);
+  line-height: 1.7; max-width: 520px;
+}
+.page-subtitle strong { color: var(--creme); font-weight: 600; }
+
+/* ─── SECTION SYSTEM ─── */
+.section-rule {
+  display: flex; align-items: center; gap: 20px;
+  padding: 0 64px; margin-bottom: 56px;
+}
+.section-rule .tag {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--ocre); white-space: nowrap;
+}
+.section-rule .line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(200,150,60,0.5), transparent);
+}
+.section-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+  line-height: 1.1; color: var(--dark);
+}
+.section-h em { font-style: italic; color: var(--indigo); }
+
+/* ─── INTRO BAND ─── */
+.intro-band {
+  padding: 80px 64px;
+  background: var(--creme);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: center;
+  border-bottom: 1px solid var(--creme-dk);
+}
+.intro-band p {
+  font-size: 1.05rem; line-height: 1.85; color: var(--text-warm); font-weight: 300;
+}
+.intro-band p strong { color: var(--dark); font-weight: 600; }
+.intro-band p + p { margin-top: 18px; }
+.pullquote {
+  border-left: 3px solid var(--ocre);
+  padding: 20px 28px;
+  background: rgba(200,150,60,0.06);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--dark); line-height: 1.7;
+}
+
+/* ─── SERVICES GRID ─── */
+.services { padding: 80px 64px 100px; background: var(--creme); }
+.srv-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--creme-dk); margin-top: 60px;
+}
+.srv-card {
+  background: var(--creme); padding: 44px 36px;
+  position: relative; transition: background 0.3s;
+  cursor: default;
+}
+.srv-card:hover { background: #fff; }
+.srv-card::before {
+  content: ''; position: absolute; top: 0; left: 36px; right: 36px;
+  height: 2px; background: transparent; transition: background 0.3s;
+}
+.srv-card:hover::before { background: var(--ocre); }
+.srv-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem; color: var(--creme-dk);
+  font-style: italic; margin-bottom: 20px; line-height: 1;
+}
+.srv-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: var(--dark); margin-bottom: 14px;
+}
+.srv-text {
+  font-size: 0.88rem; line-height: 1.75; color: var(--text-warm); font-weight: 300;
+  margin-bottom: 20px;
+}
+.srv-items { list-style: none; }
+.srv-items li {
+  font-size: 0.82rem; color: var(--text-warm); padding: 6px 0;
+  border-bottom: 1px solid rgba(200,150,60,0.12);
+  display: flex; align-items: center; gap: 10px;
+}
+.srv-items li:last-child { border-bottom: none; }
+.srv-items li::before {
+  content: ''; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--ocre); flex-shrink: 0;
+}
+
+/* ─── HOW I WORK ─── */
+.how {
+  padding: 80px 64px 100px;
+  background: var(--dark);
+}
+.how .section-h { color: var(--creme); margin-bottom: 64px; }
+.how .section-h em { color: var(--ocre-lt); }
+.how .section-rule .tag { color: var(--ocre-lt); }
+.how .section-rule .line { background: linear-gradient(90deg, rgba(200,150,60,0.4), transparent); }
+
+.how-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: rgba(200,150,60,0.1);
+}
+.how-step {
+  background: var(--dark); padding: 40px 32px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+.how-step:hover { border-color: var(--ocre); background: rgba(200,150,60,0.04); }
+.how-step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem; color: rgba(200,150,60,0.15);
+  font-style: italic; line-height: 1; margin-bottom: 20px;
+}
+.how-step-title {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ocre); margin-bottom: 12px;
+}
+.how-step-text {
+  font-size: 0.88rem; line-height: 1.7; color: var(--text-lt); font-weight: 300;
+}
+
+/* ─── AREAS DEEP ─── */
+.areas {
+  padding: 80px 64px 100px;
+  background: var(--indigo);
+}
+.areas .section-h { color: var(--creme); margin-bottom: 60px; }
+.areas .section-h em { color: var(--ocre-lt); }
+.areas .section-rule .tag { color: var(--ocre-lt); }
+.areas .section-rule .line { background: linear-gradient(90deg, rgba(229,184,106,0.5), transparent); }
+
+.areas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.area-card {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  padding: 44px 40px; display: grid; grid-template-columns: 56px 1fr; gap: 24px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.area-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(200,150,60,0.4); }
+.area-icon {
+  width: 56px; height: 56px;
+  background: rgba(200,150,60,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ocre-lt); flex-shrink: 0;
+}
+.area-icon svg { width: 24px; height: 24px; }
+.area-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: var(--creme); margin-bottom: 10px;
+}
+.area-text {
+  font-size: 0.88rem; line-height: 1.75; color: var(--text-lt); font-weight: 300;
+}
+
+/* ─── CTA BAND ─── */
+.cta-band {
+  padding: 80px 64px;
+  background: var(--ocre);
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.cta-band-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--dark); line-height: 1.15; margin-bottom: 12px;
+}
+.cta-band-left p {
+  font-size: 1rem; color: var(--dark); opacity: 0.7; font-weight: 300;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 14px; flex-shrink: 0;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--ocre); background: var(--dark);
+  padding: 18px 36px; border: 2px solid var(--dark);
+  transition: background 0.3s, color 0.3s;
+}
+.cta-btn:hover { background: transparent; color: var(--dark); }
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 36px 64px; background: var(--dark);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-left {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-style: italic; color: var(--ocre-lt);
+}
+.footer-nav { display: flex; gap: 28px; }
+.footer-nav a {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(200,150,60,0.4);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--ocre-lt); }
+.footer-nav a.active { color: var(--ocre-lt); }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; } .nav-links { display: none; }
+  .page-hero { padding: 100px 24px 60px; }
+  .intro-band { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+  .section-rule { padding: 0 24px; }
+  .services, .how, .areas, .cta-band { padding-left: 24px; padding-right: 24px; }
+  .srv-grid { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr 1fr; }
+  .areas-grid { grid-template-columns: 1fr; }
+  .cta-band { flex-direction: column; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="top-nav">
+  <a href="rui-coelho.html" class="nav-logo">Rui <span>Coelho</span></a>
+  <ul class="nav-links">
+    <li><a href="rui-coelho.html">Início</a></li>
+    <li><a href="support.html" class="active">Consultoria</a></li>
+    <li><a href="marketing.html">Produto &amp; Tec</a></li>
+    <li><a href="rui-coelho.html#contato">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <div class="page-eyebrow">
+      <div class="page-eyebrow-dot"></div>
+      <div class="page-eyebrow-text">Consultoria & Suporte</div>
+    </div>
+    <h1 class="page-title">Tecnologia que<br><em>resolve</em> problemas.</h1>
+    <p class="page-subtitle">
+      Mais de 19 anos a transformar desafios tecnológicos complexos em soluções claras e executáveis — nos setores de energia, auditoria e sustentabilidade.
+    </p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-band">
+  <div class="reveal">
+    <p>
+      Ao longo da minha carreira, desenvolvi uma capacidade pouco comum: <strong>transitar com naturalidade entre o técnico e o estratégico</strong>. Sei fazer as perguntas certas antes de escrever uma linha de código — e sei implementar o que foi desenhado em sala de reuniões.
+    </p>
+    <p>
+      A minha consultoria é orientada a resultados. Não entrego relatórios — entrego sistemas a funcionar, equipas alinhadas e decisões bem fundamentadas.
+    </p>
+  </div>
+  <div class="pullquote reveal d2">
+    "A diferença entre um bom consultor e um excelente está em saber quando a tecnologia não é a resposta — e ter coragem de o dizer."
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div id="servicos"></div>
+<div class="section-rule" style="padding-top:80px">
+  <span class="tag">Serviços</span><div class="line"></div>
+</div>
+<section class="services">
+  <h2 class="section-h reveal">O que posso<br><em>fazer por si</em></h2>
+  <div class="srv-grid">
+
+    <div class="srv-card reveal d1">
+      <div class="srv-num">01</div>
+      <div class="srv-title">Estratégia Tecnológica</div>
+      <div class="srv-text">Definição de roadmaps tecnológicos alinhados com os objetivos de negócio — desde a auditoria do estado atual até à priorização de iniciativas com maior retorno.</div>
+      <ul class="srv-items">
+        <li>Diagnóstico tecnológico</li>
+        <li>Roadmap de produto e plataforma</li>
+        <li>Avaliação de arquitetura</li>
+        <li>Decisões build vs buy</li>
+      </ul>
+    </div>
+
+    <div class="srv-card reveal d2">
+      <div class="srv-num">02</div>
+      <div class="srv-title">Inovação & Produto Digital</div>
+      <div class="srv-text">Estruturação e aceleração de produtos digitais — da ideia ao lançamento. Com foco especial em plataformas para o setor energético e de sustentabilidade.</div>
+      <ul class="srv-items">
+        <li>Discovery e definição de produto</li>
+        <li>Gestão de desenvolvimento</li>
+        <li>Integração de IoT e dados</li>
+        <li>Plataformas de monitoramento</li>
+      </ul>
+    </div>
+
+    <div class="srv-card reveal d3">
+      <div class="srv-num">03</div>
+      <div class="srv-title">Transformação Digital</div>
+      <div class="srv-text">Acompanhamento de processos de mudança tecnológica em organizações — com atenção especial à adoção, formação de equipas e gestão da transição.</div>
+      <ul class="srv-items">
+        <li>Mapeamento de processos</li>
+        <li>Seleção e implementação de ferramentas</li>
+        <li>Formação de equipas técnicas</li>
+        <li>Change management</li>
+      </ul>
+    </div>
+
+    <div class="srv-card reveal d1">
+      <div class="srv-num">04</div>
+      <div class="srv-title">Asset Management Tecnológico</div>
+      <div class="srv-text">Estruturação de sistemas de gestão e monitoramento de ativos físicos e digitais — com experiência direta no setor de energia distribuída.</div>
+      <ul class="srv-items">
+        <li>Arquitetura de sistemas de monitoramento</li>
+        <li>Automação de relatórios</li>
+        <li>KPIs e dashboards operacionais</li>
+        <li>Manutenção preditiva digital</li>
+      </ul>
+    </div>
+
+    <div class="srv-card reveal d2">
+      <div class="srv-num">05</div>
+      <div class="srv-title">CTO as a Service</div>
+      <div class="srv-text">Liderança técnica executiva para empresas que precisam de um CTO experiente sem o compromisso de uma contratação a tempo inteiro — especialmente útil em fases de crescimento ou transição.</div>
+      <ul class="srv-items">
+        <li>Liderança de equipa de desenvolvimento</li>
+        <li>Cultura e processos de engenharia</li>
+        <li>Interlocução técnica com investidores</li>
+        <li>Recrutamento e avaliação técnica</li>
+      </ul>
+    </div>
+
+    <div class="srv-card reveal d3">
+      <div class="srv-num">06</div>
+      <div class="srv-title">ESG & Tecnologia Verde</div>
+      <div class="srv-text">Consultoria na interseção entre tecnologia e impacto ambiental — da gestão de recursos naturais à certificação de empresas com propósito. Uma área onde a experiência prática faz toda a diferença.</div>
+      <ul class="srv-items">
+        <li>Sistemas de medição de impacto</li>
+        <li>Estratégia de energia renovável</li>
+        <li>Certificações B Corp e similares</li>
+        <li>Relatórios de sustentabilidade</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW I WORK -->
+<div class="section-rule" style="padding-top:60px; padding-bottom:0">
+  <span class="tag" style="color:var(--ocre-lt)">Processo</span>
+  <div class="line" style="background:linear-gradient(90deg,rgba(200,150,60,0.4),transparent)"></div>
+</div>
+<section class="how">
+  <h2 class="section-h reveal">Como<br><em>trabalho</em></h2>
+  <div class="how-steps">
+    <div class="how-step reveal">
+      <div class="how-step-num">01</div>
+      <div class="how-step-title">Escuta</div>
+      <div class="how-step-text">Começo por compreender o contexto real — o negócio, as pessoas, os constrangimentos. As melhores soluções surgem de perguntas bem feitas, não de respostas pré-definidas.</div>
+    </div>
+    <div class="how-step reveal d1">
+      <div class="how-step-num">02</div>
+      <div class="how-step-title">Diagnóstico</div>
+      <div class="how-step-text">Análise rigorosa do estado atual — tecnológico, organizacional e estratégico. Identifico onde está o atrito real, não o sintoma visível.</div>
+    </div>
+    <div class="how-step reveal d2">
+      <div class="how-step-num">03</div>
+      <div class="how-step-title">Solução</div>
+      <div class="how-step-text">Desenho de uma abordagem clara, faseada e realista. Com atenção ao que pode ser feito agora, ao que deve esperar, e ao que nunca deveria ser feito.</div>
+    </div>
+    <div class="how-step reveal d3">
+      <div class="how-step-num">04</div>
+      <div class="how-step-title">Execução</div>
+      <div class="how-step-text">Acompanhamento próximo da implementação — com a equipa, não ao lado dela. Entrego resultados, não documentos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<div class="section-rule" style="padding-top:60px;padding-bottom:0;background:var(--indigo)">
+  <span class="tag" style="color:var(--ocre-lt)">Setores</span>
+  <div class="line" style="background:linear-gradient(90deg,rgba(229,184,106,0.5),transparent)"></div>
+</div>
+<section class="areas">
+  <h2 class="section-h reveal">Setores onde<br><em>tenho experiência</em></h2>
+  <div class="areas-grid">
+
+    <div class="area-card reveal d1">
+      <div class="area-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </div>
+      <div>
+        <div class="area-title">Energia Solar & Renovável</div>
+        <div class="area-text">Experiência direta no desenvolvimento de plataformas digitais para geração distribuída — monitoramento remoto, gestão de ativos e operação de redes de plantas fotovoltaicas.</div>
+      </div>
+    </div>
+
+    <div class="area-card reveal d2">
+      <div class="area-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+        </svg>
+      </div>
+      <div>
+        <div class="area-title">Auditoria & Compliance Fiscal</div>
+        <div class="area-text">Liderança de transformação digital em contexto de alta complexidade regulatória — com passagem pela BDO Brasil, uma das maiores firmas de auditoria do mundo.</div>
+      </div>
+    </div>
+
+    <div class="area-card reveal d3">
+      <div class="area-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="area-title">Conservação & Recursos Naturais</div>
+        <div class="area-text">Co-fundador de empresa pioneira no uso de tecnologia para gestão sustentável de florestas tropicais — combinando geoprocessamento, dados e impacto ambiental real.</div>
+      </div>
+    </div>
+
+    <div class="area-card reveal d4">
+      <div class="area-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+      </div>
+      <div>
+        <div class="area-title">Startups & Scale-ups</div>
+        <div class="area-text">Do zero à operação em escala — com experiência como fundador, CTO e líder de produto em empresas em diferentes estágios de crescimento.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band reveal">
+  <div class="cta-band-left">
+    <h2>Tem um desafio<br>que precisa de resolver?</h2>
+    <p>Vamos conversar. Sem compromisso, sem pitch — apenas uma conversa honesta sobre o problema.</p>
+  </div>
+  <a href="mailto:ruialmodovar@gmail.com" class="cta-btn">
+    Entrar em contacto
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">Rui Coelho</div>
+  <nav class="footer-nav">
+    <a href="rui-coelho.html">Início</a>
+    <a href="support.html" class="active">Consultoria</a>
+    <a href="marketing.html">Produto &amp; Tec</a>
+    <a href="mailto:ruialmodovar@gmail.com">Contacto</a>
+  </nav>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  window.addEventListener('scroll', () => {
+    document.getElementById('top-nav').style.padding = window.scrollY > 50 ? '14px 64px' : '22px 64px';
+  });
+</script>
+</body>
+</html>
