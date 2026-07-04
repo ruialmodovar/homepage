@@ -494,6 +494,16 @@ footer {
 <script>
   const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Hamburger menu
+  const burger = document.getElementById('nav-burger');
+  const drawer = document.getElementById('nav-drawer');
+  const overlay = document.getElementById('nav-overlay');
+  function openMenu() { burger.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeMenu() { burger.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow=''; }
+  burger.addEventListener('click', () => burger.classList.contains('open') ? closeMenu() : openMenu());
+  overlay.addEventListener('click', closeMenu);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   window.addEventListener('scroll', () => {
     document.getElementById('top-nav').style.padding = window.scrollY > 50 ? '14px 64px' : '22px 64px';
   });
