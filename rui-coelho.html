@@ -34,88 +34,38 @@ body {
 }
 
 /* ─── NAV ─────────────────────────────────────────────────── */
+#nav-toggle { display: none; }
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 22px 64px;
-  background: rgba(247,240,227,0.95);
+  padding: 22px 48px;
+  background: rgba(247,240,227,0.97);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(200,150,60,0.2);
-  transition: padding 0.3s;
 }
-.nav-logo {
-  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic;
-  color: var(--dark); text-decoration: none; letter-spacing: 0.02em;
-  position: relative; z-index: 300;
-}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--dark); text-decoration: none; letter-spacing: 0.02em; }
 .nav-logo span { color: var(--ocre); font-style: normal; }
-
-/* hamburger button */
-.nav-burger {
-  display: flex; flex-direction: column; justify-content: center; gap: 5px;
-  width: 40px; height: 40px; cursor: pointer; z-index: 300; position: relative;
-  background: none; border: none; padding: 4px;
-}
-.nav-burger span {
-  display: block; width: 26px; height: 2px;
-  background: var(--dark);
-  transition: transform 0.35s ease, opacity 0.25s ease, width 0.25s ease;
-  transform-origin: center;
-}
-.nav-burger span:nth-child(3) { width: 16px; }
-.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.nav-burger.open span:nth-child(3) { width: 26px; transform: translateY(-7px) rotate(-45deg); }
-
-/* overlay */
-.nav-overlay {
-  position: fixed; inset: 0; z-index: 150;
-  background: rgba(26,18,8,0.6);
-  backdrop-filter: blur(4px);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-.nav-overlay.open { opacity: 1; pointer-events: all; }
-
-/* drawer */
-.nav-drawer {
-  position: fixed; top: 0; right: 0; bottom: 0; z-index: 160;
-  width: min(340px, 85vw);
-  background: var(--dark);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 80px 48px;
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.nav-drawer.open { transform: translateX(0); }
-
-.nav-drawer-logo {
-  font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic;
-  color: var(--ocre-lt); margin-bottom: 56px; letter-spacing: 0.03em;
-}
-.nav-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.nav-drawer ul li a {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem; font-style: italic; color: rgba(247,240,227,0.4);
-  text-decoration: none; line-height: 1.2; display: block;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(200,150,60,0.08);
-  transition: color 0.2s;
-}
-.nav-drawer ul li a:hover,
-.nav-drawer ul li a.active { color: var(--ocre-lt); }
+.nav-burger-label { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 44px; height: 44px; cursor: pointer; padding: 8px; }
+.nav-burger-label span { display: block; height: 2px; background: var(--dark); border-radius: 2px; transition: transform 0.35s, opacity 0.25s, width 0.25s; transform-origin: center; }
+.nav-burger-label span:nth-child(1) { width: 24px; }
+.nav-burger-label span:nth-child(2) { width: 24px; }
+.nav-burger-label span:nth-child(3) { width: 14px; }
+.nav-overlay { position: fixed; inset: 0; z-index: 150; background: rgba(26,18,8,0.65); backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity 0.35s; cursor: pointer; }
+.nav-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 160; width: min(320px, 80vw); background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 80px 48px; transform: translateX(110%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
+.nav-drawer-logo { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-style: italic; color: rgba(229,184,106,0.4); margin-bottom: 48px; }
+.nav-drawer ul { list-style: none; display: flex; flex-direction: column; }
+.nav-drawer ul li a { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-style: italic; color: rgba(247,240,227,0.35); text-decoration: none; display: block; padding: 12px 0; border-bottom: 1px solid rgba(200,150,60,0.08); transition: color 0.2s, padding-left 0.2s; }
 .nav-drawer ul li:last-child a { border-bottom: none; }
-.nav-drawer-contact {
-  margin-top: 48px; padding-top: 32px;
-  border-top: 1px solid rgba(200,150,60,0.15);
-}
-.nav-drawer-contact a {
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em;
-  text-transform: uppercase; color: rgba(200,150,60,0.5);
-  text-decoration: none; display: block; margin-bottom: 10px;
-  transition: color 0.2s;
-}
+.nav-drawer ul li a:hover { color: var(--ocre-lt); padding-left: 10px; }
+.nav-drawer ul li a.active { color: var(--ocre); }
+.nav-drawer-contact { margin-top: 40px; padding-top: 28px; border-top: 1px solid rgba(200,150,60,0.12); }
+.nav-drawer-contact a { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(200,150,60,0.4); text-decoration: none; display: block; margin-bottom: 12px; transition: color 0.2s; }
 .nav-drawer-contact a:hover { color: var(--ocre); }
+#nav-toggle:checked ~ .nav-overlay { opacity: 1; pointer-events: all; }
+#nav-toggle:checked ~ .nav-drawer { transform: translateX(0); }
+#nav-toggle:checked ~ nav .nav-burger-label span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 24px; }
+#nav-toggle:checked ~ nav .nav-burger-label span:nth-child(2) { opacity: 0; }
+#nav-toggle:checked ~ nav .nav-burger-label span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 24px; }
 
 /* ─── HERO ─────────────────────────────────────────────────── */
 .hero {
@@ -490,6 +440,12 @@ footer {
   text-transform: uppercase; color: rgba(200,150,60,0.5);
   margin-bottom: 6px;
 }
+.footer-menu-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(200,150,60,0.5);
+  cursor: pointer; transition: color 0.2s;
+}
+.footer-menu-label:hover { color: var(--ocre-lt); }
 
 /* ─── REVEAL ──────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -522,14 +478,13 @@ footer {
 <body>
 
 <!-- NAV -->
+<input type="checkbox" id="nav-toggle">
 <nav id="top-nav">
   <a href="index.html" class="nav-logo">Rui <span>Coelho</span></a>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <label for="nav-toggle" class="nav-burger-label" aria-label="Menu"><span></span><span></span><span></span></label>
 </nav>
-<div class="nav-overlay" id="nav-overlay"></div>
-<div class="nav-drawer" id="nav-drawer">
+<label for="nav-toggle" class="nav-overlay"></label>
+<div class="nav-drawer">
   <div class="nav-drawer-logo">Rui Coelho</div>
   <ul>
     <li><a href="rui-coelho.html" class="active">Início</a></li>
@@ -558,7 +513,7 @@ footer {
       <h1 class="hero-name"><em>Rui</em></h1>
       <div class="hero-surname">Coelho</div>
       <p class="hero-role">
-        Líder executivo com mais de <strong>19 anos</strong> em Tecnologia & Inovação.<br>
+        Líder executivo com mais de <strong>23 anos</strong> em Tecnologia & Inovação.<br>
         Head of Innovation & Asset Management<br>
         na <strong>Faro Energy</strong>.
       </p>
@@ -574,7 +529,7 @@ footer {
     <div class="hero-place" style="display:none"></div>
     <div class="hero-stats">
       <div class="stat-card">
-        <div class="stat-num">19<sup>+</sup></div>
+        <div class="stat-num">23<sup>+</sup></div>
         <div class="stat-label">Anos em liderança tecnológica</div>
       </div>
       <div class="stat-card">
@@ -609,7 +564,7 @@ footer {
   </div>
   <div class="about-right reveal d1">
     <p>
-      Tenho uma convicção simples: <strong>tecnologia só importa quando resolve problemas reais</strong>. Ao longo de mais de 19 anos, essa convicção guiou-me por setores radicalmente diferentes — e tornou-me um executivo mais completo a cada transição.
+      Tenho uma convicção simples: <strong>tecnologia só importa quando resolve problemas reais</strong>. Ao longo de mais de 23 anos, essa convicção guiou-me por setores radicalmente diferentes — e tornou-me um executivo mais completo a cada transição.
     </p>
     <div class="pullquote">
       "O que me move não é a tecnologia em si — é o que ela torna possível."
@@ -724,7 +679,7 @@ footer {
     <div class="exp-card reveal d3">
       <div class="exp-num">03</div>
       <div class="exp-title">Liderança Executiva</div>
-      <div class="exp-text">Mais de 19 anos a construir e liderar equipas técnicas de alto desempenho em startups, scale-ups e grandes corporações, com foco em cultura de inovação.</div>
+      <div class="exp-text">Mais de 23 anos a construir e liderar equipas técnicas de alto desempenho em startups, scale-ups e grandes corporações, com foco em cultura de inovação.</div>
     </div>
 
     <div class="exp-card reveal d1">
@@ -838,35 +793,24 @@ footer {
     <div class="footer-origin">Inovação · Tecnologia · Energia</div>
     <div class="footer-left">Rui Coelho</div>
   </div>
-  <nav style="display:flex;gap:28px;">
-    <a href="support.html" style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,150,60,0.4);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E5B86A'" onmouseout="this.style.color='rgba(200,150,60,0.4)'">Consultoria</a>
-    <a href="marketing.html" style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,150,60,0.4);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E5B86A'" onmouseout="this.style.color='rgba(200,150,60,0.4)'">Produto &amp; Tec</a>
-    <a href="mailto:ruialmodovar@gmail.com" style="font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(200,150,60,0.4);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E5B86A'" onmouseout="this.style.color='rgba(200,150,60,0.4)'">Contacto</a>
-  </nav>
+  <label for="nav-toggle" class="footer-menu-label">Menu ☰</label>
   <div class="footer-right">Head of Innovation & Asset Management · Faro Energy · © 2025</div>
 </footer>
 
 <script>
   // Reveal on scroll
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 
-  // Nav compact on scroll
-
-  // Hamburger menu
-  const burger = document.getElementById('nav-burger');
-  const drawer = document.getElementById('nav-drawer');
-  const overlay = document.getElementById('nav-overlay');
-  function openMenu() { burger.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
-  function closeMenu() { burger.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow=''; }
-  burger.addEventListener('click', () => burger.classList.contains('open') ? closeMenu() : openMenu());
-  overlay.addEventListener('click', closeMenu);
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('top-nav');
-    nav.style.padding = window.scrollY > 50 ? '14px 64px' : '22px 64px';
+  // Nav toggle close on link click
+  document.addEventListener('DOMContentLoaded', function() {
+    var t = document.getElementById('nav-toggle');
+    if (!t) return;
+    document.querySelectorAll('.nav-drawer a').forEach(function(a) {
+      a.addEventListener('click', function() { t.checked = false; });
+    });
   });
 </script>
 </body>

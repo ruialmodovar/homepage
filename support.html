@@ -25,36 +25,39 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Hind', sans-serif; background: var(--creme); color: var(--dark); overflow-x: hidden; }
 
-/* ─── NAV ─── */
+/* ─── NAV ─────────────────────────────────────────────────── */
+#nav-toggle { display: none; }
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 22px 64px;
-  background: rgba(247,240,227,0.93);
+  padding: 22px 48px;
+  background: rgba(247,240,227,0.97);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(200,150,60,0.2);
-  transition: padding 0.3s;
 }
-.nav-logo {
-  font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic;
-  color: var(--dark); text-decoration: none;
-}
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--dark); text-decoration: none; letter-spacing: 0.02em; }
 .nav-logo span { color: var(--ocre); font-style: normal; }
-.nav-links { display: flex; gap: 40px; list-style: none; }
-.nav-links a {
-  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--text-warm); text-decoration: none;
-  transition: color 0.2s; position: relative;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
-  height: 1px; background: var(--ocre);
-  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
-}
-.nav-links a:hover { color: var(--ocre); }
-.nav-links a:hover::after { transform: scaleX(1); }
-.nav-links a.active { color: var(--ocre); }
-.nav-links a.active::after { transform: scaleX(1); }
+.nav-burger-label { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 44px; height: 44px; cursor: pointer; padding: 8px; }
+.nav-burger-label span { display: block; height: 2px; background: var(--dark); border-radius: 2px; transition: transform 0.35s, opacity 0.25s, width 0.25s; transform-origin: center; }
+.nav-burger-label span:nth-child(1) { width: 24px; }
+.nav-burger-label span:nth-child(2) { width: 24px; }
+.nav-burger-label span:nth-child(3) { width: 14px; }
+.nav-overlay { position: fixed; inset: 0; z-index: 150; background: rgba(26,18,8,0.65); backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity 0.35s; cursor: pointer; }
+.nav-drawer { position: fixed; top: 0; right: 0; bottom: 0; z-index: 160; width: min(320px, 80vw); background: var(--dark); display: flex; flex-direction: column; justify-content: center; padding: 80px 48px; transform: translateX(110%); transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
+.nav-drawer-logo { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-style: italic; color: rgba(229,184,106,0.4); margin-bottom: 48px; }
+.nav-drawer ul { list-style: none; display: flex; flex-direction: column; }
+.nav-drawer ul li a { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-style: italic; color: rgba(247,240,227,0.35); text-decoration: none; display: block; padding: 12px 0; border-bottom: 1px solid rgba(200,150,60,0.08); transition: color 0.2s, padding-left 0.2s; }
+.nav-drawer ul li:last-child a { border-bottom: none; }
+.nav-drawer ul li a:hover { color: var(--ocre-lt); padding-left: 10px; }
+.nav-drawer ul li a.active { color: var(--ocre); }
+.nav-drawer-contact { margin-top: 40px; padding-top: 28px; border-top: 1px solid rgba(200,150,60,0.12); }
+.nav-drawer-contact a { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(200,150,60,0.4); text-decoration: none; display: block; margin-bottom: 12px; transition: color 0.2s; }
+.nav-drawer-contact a:hover { color: var(--ocre); }
+#nav-toggle:checked ~ .nav-overlay { opacity: 1; pointer-events: all; }
+#nav-toggle:checked ~ .nav-drawer { transform: translateX(0); }
+#nav-toggle:checked ~ nav .nav-burger-label span:nth-child(1) { transform: translateY(8px) rotate(45deg); width: 24px; }
+#nav-toggle:checked ~ nav .nav-burger-label span:nth-child(2) { opacity: 0; }
+#nav-toggle:checked ~ nav .nav-burger-label span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); width: 24px; }
 
 /* ─── PAGE HERO ─── */
 .page-hero {
@@ -290,6 +293,12 @@ footer {
 }
 .footer-nav a:hover { color: var(--ocre-lt); }
 .footer-nav a.active { color: var(--ocre-lt); }
+.footer-menu-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(200,150,60,0.4);
+  cursor: pointer; transition: color 0.2s;
+}
+.footer-menu-label:hover { color: var(--ocre-lt); }
 
 /* ─── REVEAL ─── */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -298,7 +307,7 @@ footer {
 .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
 
 @media (max-width: 960px) {
-  nav { padding: 16px 24px; } .nav-links { display: none; }
+  nav { padding: 16px 24px; }
   .page-hero { padding: 100px 24px 60px; }
   .intro-band { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
   .section-rule { padding: 0 24px; }
@@ -313,15 +322,27 @@ footer {
 </head>
 <body>
 
+<input type="checkbox" id="nav-toggle">
 <nav id="top-nav">
   <a href="rui-coelho.html" class="nav-logo">Rui <span>Coelho</span></a>
-  <ul class="nav-links">
+  <label for="nav-toggle" class="nav-burger-label" aria-label="Menu"><span></span><span></span><span></span></label>
+</nav>
+<label for="nav-toggle" class="nav-overlay"></label>
+<div class="nav-drawer">
+  <div class="nav-drawer-logo">Rui Coelho</div>
+  <ul>
     <li><a href="rui-coelho.html">Início</a></li>
     <li><a href="support.html" class="active">Consultoria</a></li>
-    <li><a href="marketing.html">Produto &amp; Tec</a></li>
+    <li><a href="marketing.html">Produto & Tec</a></li>
+    <li><a href="rui-coelho.html#sobre">Sobre</a></li>
+    <li><a href="rui-coelho.html#trajetoria">Trajetória</a></li>
     <li><a href="rui-coelho.html#contato">Contacto</a></li>
   </ul>
-</nav>
+  <div class="nav-drawer-contact">
+    <a href="https://www.linkedin.com/in/ruimscoelho/" target="_blank">LinkedIn</a>
+    <a href="mailto:ruialmodovar@gmail.com">ruialmodovar@gmail.com</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="page-hero">
@@ -332,7 +353,7 @@ footer {
     </div>
     <h1 class="page-title">Tecnologia que<br><em>resolve</em> problemas.</h1>
     <p class="page-subtitle">
-      Mais de 19 anos a transformar desafios tecnológicos complexos em soluções claras e executáveis — nos setores de energia, auditoria e sustentabilidade.
+      Mais de 23 anos a transformar desafios tecnológicos complexos em soluções claras e executáveis — nos setores de energia, auditoria e sustentabilidade.
     </p>
   </div>
 </section>
@@ -543,29 +564,23 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-left">Rui Coelho</div>
-  <nav class="footer-nav">
-    <a href="rui-coelho.html">Início</a>
-    <a href="support.html" class="active">Consultoria</a>
-    <a href="marketing.html">Produto &amp; Tec</a>
-    <a href="mailto:ruialmodovar@gmail.com">Contacto</a>
-  </nav>
+  <label for="nav-toggle" class="footer-menu-label">Menu ☰</label>
 </footer>
 
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Reveal on scroll
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 
-  // Hamburger menu
-  const burger = document.getElementById('nav-burger');
-  const drawer = document.getElementById('nav-drawer');
-  const overlay = document.getElementById('nav-overlay');
-  function openMenu() { burger.classList.add('open'); drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
-  function closeMenu() { burger.classList.remove('open'); drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow=''; }
-  burger.addEventListener('click', () => burger.classList.contains('open') ? closeMenu() : openMenu());
-  overlay.addEventListener('click', closeMenu);
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  window.addEventListener('scroll', () => {
-    document.getElementById('top-nav').style.padding = window.scrollY > 50 ? '14px 64px' : '22px 64px';
+  // Nav toggle close on link click
+  document.addEventListener('DOMContentLoaded', function() {
+    var t = document.getElementById('nav-toggle');
+    if (!t) return;
+    document.querySelectorAll('.nav-drawer a').forEach(function(a) {
+      a.addEventListener('click', function() { t.checked = false; });
+    });
   });
 </script>
 </body>
